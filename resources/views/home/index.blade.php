@@ -66,35 +66,33 @@
         </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
-            <div class="content">
-                <div class="title m-b-md">
-                    Game Of Life
-                </div>
-                <div class="buttons">
-                    <button type="button" id="play" class="btn btn-success">Play</button>
-                    <button type="button" id="stop" class="btn btn-danger">Stop</button>
-                    <button type="button" id="next" class="btn btn-primary">Next</button>
-                    <button type="button" id="clear" class="btn btn-info">Clear</button>
-
-                    <form method="POST" action="/api/generation/save">
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" class="form-control" id="name" required>
-                        </div>
-                        <button type="button" id="save" class="btn btn-link">Save</button>
-                    </form>
-                </div>
-                <table id="matrix" style="height:500px;width:1200px;">
-                    @for ($x = 0; $x < 8; $x++)
-                        <tr>
-                        @for ($y = 0; $y < 10; $y++)
-                            <td></td>
-                        @endfor
-                        </tr>
-                    @endfor
-                </table>
+        <div class="content">
+            <div class="title m-b-md">
+                Game Of Life
             </div>
+            <div class="buttons">
+                <button type="button" id="play" class="btn btn-success">Play</button>
+                <button type="button" id="stop" class="btn btn-danger">Stop</button>
+                <button type="button" id="next" class="btn btn-primary">Next</button>
+                <button type="button" id="clear" class="btn btn-info">Clear</button>
+
+                <form method="POST" action="/api/generation/save">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" required>
+                    </div>
+                    <button type="button" id="save" class="btn btn-link">Save</button>
+                </form>
+            </div>
+            <table id="matrix" style="height:500px;width:1200px;">
+                @for ($x = 0; $x < 8; $x++)
+                    <tr>
+                    @for ($y = 0; $y < 10; $y++)
+                        <td></td>
+                    @endfor
+                    </tr>
+                @endfor
+            </table>
         </div>
 
         <script src="/js/app.js"></script>
