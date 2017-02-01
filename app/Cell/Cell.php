@@ -27,6 +27,8 @@ class Cell
      */
     protected $_value;
 
+    public function getValue() { return $this->_value; }
+
     /**
      * @param int $_x 
      * @param int $_y 
@@ -38,5 +40,13 @@ class Cell
         $this->_y = $_y;
         $this->_value = $_value;
         $this->_state = StateFactory::createState($_value);
+    }
+
+    /**
+     * @return int
+     */
+    public function nextState()
+    {
+        return $this->_state->nextState();
     }
 }

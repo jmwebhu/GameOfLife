@@ -1,11 +1,17 @@
 <?php
 
-namespace App;
+namespace App\Board;
 
 use App\Cell\Cell;
 
 class Board 
 {
+    /**
+     * Ez hatarozza meg, hogy egy pozicio mellett hany szomszed erteket vizsgal
+     * @var int
+     */
+    const NEIGHBOURS_COUNT = 8;
+
     /**
      * @var int
      */
@@ -39,7 +45,14 @@ class Board
     public function nextGeneration()
     {
         $cells = $this->getCellsFromMatrix();
-        var_dump($cells);
+        foreach ($cells as $x => $array) {
+            foreach ($array as $y => $cell) {
+                /**
+                 * @var App\Cell\Cell $cell
+                 */
+                $nextState = $cell->nextState($cells);
+            }
+        }
     }
 
     /**
@@ -56,5 +69,17 @@ class Board
         }
 
         return $cells;
+    }
+
+    /**
+     * Visszaadja a megadott pozicio mellett levo 8 erteket
+     * Vizszintesen, fuggolegesen, atlosan
+     * @param int $x 
+     * @param int $y 
+     * @return void
+     */
+    public function getNeighboursOf($x, $y)
+    {
+        $half = intval(self::NEIGHBOURS_COUNT / 2);
     }
 }

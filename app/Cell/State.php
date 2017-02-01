@@ -2,7 +2,7 @@
 
 namespace App\Cell;
 
-use App\Cell;
+use App\Cell\Cell;
 
 abstract class State
 {
@@ -18,4 +18,11 @@ abstract class State
     {
         $this->_value = $_value;
     }
+
+    /**
+     * @param [][] $cells
+     * @param NeighbourCounter[] $counters
+     * @return int  
+     */
+    abstract public function nextState(array $cells, array $counters); 
 }

@@ -5,7 +5,7 @@ namespace Tests\Unit;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use App\Board;
+use App\Board\Board;
 
 class BoardTest extends TestCase
 {
@@ -19,17 +19,53 @@ class BoardTest extends TestCase
      */
     public function testSetMatrix()
     {
-        $board = new Board;
         $matrix = [
             [0, 1, 0],
             [1, 1, 0],
             [0, 0, 0]
         ];
 
-        $board->setMatrix($matrix);
+        $this->createBoard($matrix);
 
-        $this->assertEquals(3, $board->getWidth());
-        $this->assertEquals(3, $board->getHeight());
-        $this->assertEquals($matrix, $board->getMatrix());
+        $this->assertEquals(3, $this->_board->getWidth());
+        $this->assertEquals(3, $this->_board->getHeight());
+        $this->assertEquals($matrix, $this->_board->getMatrix());
+    }
+
+    /**
+     * @covers Board::getCellsFromMatrix()
+     */
+    public function testGetCellsFromMatrix()
+    {
+        $matrix = [
+            [0, 1, 0],
+            [1, 1, 0],
+            [0, 0, 0]
+        ];
+
+        $this->createBoard($matrix);
+        $cells = $this->invokeMethod($this->_board, 'getCellsFromMatrix', []);
+
+        // Elso sor
+        $this->assertEquals(0, $cells[0][0]->getValue());
+        $this->assertEquals(1, $cells[0][1]->getValue());
+        $this->assertEquals(0, $cells[0][2]->getValue());
+
+        // Masodik sor
+        $this->assertEquals(1, $cells[1][0]->getValue());
+        $this->assertEquals(1, $cells[1][1]->getValue());
+        $this->assertEquals(0, $cells[1][2]->getValue());
+
+        // Harmadik sor
+        $this->assertEquals(0, $cells[2][0]->getValue());
+        $this->assertEquals(0, $cells[2][1]->getValue());
+        $this->assertEquals(0, $cells[2][2]->getValue());
+    }
+
+    protected function createBoard(array $matrix)
+    {
+        $board = new Board;
+        $board->setMatrix($matrix);
+        $this->_board = $board;
     }
 }
