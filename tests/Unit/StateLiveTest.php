@@ -2,12 +2,12 @@
 
 namespace Tests\Unit;
 
+use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Tests\Unit\AbstractStateTestCase;
 use App\Cell\StateLive;
 
-class StateLiveTest extends AbstractStateTestCase
+class StateLiveTest extends TestCase
 {
     /**
      * Szabalyok:

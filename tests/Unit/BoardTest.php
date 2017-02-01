@@ -62,6 +62,95 @@ class BoardTest extends TestCase
         $this->assertEquals(0, $cells[2][2]->getValue());
     }
 
+    /**
+     * @covers Board::nextGeneration()
+     */
+    public function testNextGenerationBlinker()
+    {
+        $matrix = [
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+            [0, 1, 1, 1, 0],
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+        ];
+
+        $expectedNextGeneration = [
+            [0, 0, 0, 0, 0],
+            [0, 0, 1, 0, 0],
+            [0, 0, 1, 0, 0],
+            [0, 0, 1, 0, 0],
+            [0, 0, 0, 0, 0],
+        ];
+
+        $this->createBoard($matrix);
+        $nextGeneration = $this->_board->nextGeneration();
+        $this->assertEquals($expectedNextGeneration, $nextGeneration);
+    }
+
+    /**
+     * @covers Board::nextGeneration()
+     */
+    public function testNextGenerationToad()
+    {
+        $matrix = [
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 1, 1, 1, 0],
+            [0, 1, 1, 1, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+        ];
+
+        $expectedNextGeneration = [
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 1, 0, 0],
+            [0, 1, 0, 0, 1, 0],
+            [0, 1, 0, 0, 1, 0],
+            [0, 0, 1, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+        ];
+
+        $this->createBoard($matrix);
+        $nextGeneration = $this->_board->nextGeneration();
+        $this->assertEquals($expectedNextGeneration, $nextGeneration);
+    }
+
+    /**
+     * @covers Board::nextGeneration()
+     */
+    public function testNextGenerationBlock()
+    {
+        $matrix = [
+            [0, 0, 0, 0],
+            [0, 1, 1, 0],
+            [0, 1, 1, 0],
+            [0, 0, 0, 0],
+        ];
+
+        $this->createBoard($matrix);
+        $nextGeneration = $this->_board->nextGeneration();
+        $this->assertEquals($matrix, $nextGeneration);
+    }
+
+    /**
+     * @covers Board::nextGeneration()
+     */
+    public function testNextGenerationBeehive()
+    {
+        $matrix = [
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 1, 1, 0, 0],
+            [0, 1, 0, 0, 1, 0],
+            [0, 0, 1, 1, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+        ];
+
+        $this->createBoard($matrix);
+        $nextGeneration = $this->_board->nextGeneration();
+        $this->assertEquals($matrix, $nextGeneration);
+    }
+
     protected function createBoard(array $matrix)
     {
         $board = new Board;

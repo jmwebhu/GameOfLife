@@ -5,10 +5,9 @@ namespace Tests\Unit;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Tests\Unit\AbstractStateTestCase;
 use App\Cell\StateDead;
 
-class StateDeadTest extends AbstractStateTestCase
+class StateDeadTest extends TestCase
 {
     /**
      * Szabalyok:
