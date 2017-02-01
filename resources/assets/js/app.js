@@ -31,7 +31,8 @@ var App = {
                 matrix: App.getMatrix()
             },
             success: function (data) {
-                console.log(data); 
+                $('input#name').val('');
+                console.log('Successful save'); 
             }
         });
     },

@@ -26,7 +26,7 @@ Route::post('/generation/next', function (Request $request) {
     $board->setMatrix($matrix);
     $nextGeneration = $board->nextGeneration();
 
-    return json_encode($nextGeneration);
+    return $nextGeneration;
 });
 
 Route::post('/generation/save', function (Request $request) {
@@ -36,5 +36,7 @@ Route::post('/generation/save', function (Request $request) {
     $generation->states = json_encode($matrix);
 
     $generation->save(); 
+
+    return $generation->id;
 });
 
