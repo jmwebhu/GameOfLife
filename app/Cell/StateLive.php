@@ -12,6 +12,10 @@ class StateLive extends State
      */
     public function nextState($neighbourCount)
     {
+        if (in_array($neighbourCount, range(2, 3))) {
+            return 1;
+        }
         
+        return 0;
     }
 }

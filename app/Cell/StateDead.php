@@ -12,7 +12,11 @@ class StateDead extends State
      */
     public function nextState($neighbourCount)
     {
-        
+        if ($neighbourCount == 3) {
+            return 1;
+        } 
+
+        return 0;
     }
 }
 
