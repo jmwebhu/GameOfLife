@@ -1,14 +1,16 @@
+
 var App = {
     interval: null,
     init: function () {
         this.cacheElements();
-        this.bindEvents(); 
+        this.bindEvents();
     },
     cacheElements: function () {
         this.$play = $('button#play');
         this.$next = $('button#next');
         this.$stop = $('button#stop');
         this.$clear = $('button#clear');
+        this.$save = $('button#save');
     },
     bindEvents: function () {
         $('table').on('click', 'td', App.cellClick);
@@ -17,6 +19,21 @@ var App = {
         this.$clear.click(App.clearMatrix);
         this.$play.click(App.playClick);
         this.$stop.click(App.stopClick);
+        this.$save.click(App.saveClick);
+    },
+    saveClick: function () {
+        $.ajax({
+            url: '/api/generation/save',
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                name: $('input#name').val(),
+                matrix: App.getMatrix()
+            },
+            success: function (data) {
+                console.log(data); 
+            }
+        });
     },
     cellClick: function () {
         $(this).toggleClass('active');
@@ -24,7 +41,7 @@ var App = {
     nextClick: function () {
         // Itt valoszinuleg hash -t kellene generalni az ertekekbol, igy lehetne GET keres, sajnos nem volt ra idom
         $.ajax({
-            url: '/api/nextGeneration',
+            url: '/api/generation/next',
             type: 'POST',
             dataType: 'json',
             data: {

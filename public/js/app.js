@@ -10299,7 +10299,8 @@ return jQuery;
 /***/ 10:
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function($) {var App = {
+/* WEBPACK VAR INJECTION */(function($) {
+var App = {
     interval: null,
     init: function init() {
         this.cacheElements();
@@ -10310,6 +10311,7 @@ return jQuery;
         this.$next = $('button#next');
         this.$stop = $('button#stop');
         this.$clear = $('button#clear');
+        this.$save = $('button#save');
     },
     bindEvents: function bindEvents() {
         $('table').on('click', 'td', App.cellClick);
@@ -10318,6 +10320,21 @@ return jQuery;
         this.$clear.click(App.clearMatrix);
         this.$play.click(App.playClick);
         this.$stop.click(App.stopClick);
+        this.$save.click(App.saveClick);
+    },
+    saveClick: function saveClick() {
+        $.ajax({
+            url: '/api/generation/save',
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                name: $('input#name').val(),
+                matrix: App.getMatrix()
+            },
+            success: function success(data) {
+                console.log(data);
+            }
+        });
     },
     cellClick: function cellClick() {
         $(this).toggleClass('active');
@@ -10325,7 +10342,7 @@ return jQuery;
     nextClick: function nextClick() {
         // Itt valoszinuleg hash -t kellene generalni az ertekekbol, igy lehetne GET keres, sajnos nem volt ra idom
         $.ajax({
-            url: '/api/nextGeneration',
+            url: '/api/generation/next',
             type: 'POST',
             dataType: 'json',
             data: {

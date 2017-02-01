@@ -14,17 +14,27 @@ use Illuminate\Http\Request;
 */
 
 use App\Board\Board;
+use App\Generation;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/nextGeneration', function (Request $request) {
+Route::post('/generation/next', function (Request $request) {
     $matrix = $request->input('matrix');
     $board = new Board;
     $board->setMatrix($matrix);
     $nextGeneration = $board->nextGeneration();
 
     return json_encode($nextGeneration);
+});
+
+Route::post('/generation/save', function (Request $request) {
+    $matrix = $request->input('matrix');
+    $generation = new Generation;
+    $generation->name = $request->input('name');
+    $generation->states = json_encode($matrix);
+
+    $generation->save(); 
 });
 
