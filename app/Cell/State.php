@@ -20,9 +20,8 @@ abstract class State
     }
 
     /**
-     * @param [][] $cells
-     * @param NeighbourCounter[] $counters
+     * @param int $neighbourCount
      * @return int  
      */
-    abstract public function nextState(array $cells, array $counters); 
+    abstract public function nextState($neighbourCount); 
 }

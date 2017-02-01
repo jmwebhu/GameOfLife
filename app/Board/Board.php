@@ -58,7 +58,7 @@ class Board
     /**
      * @return [][]
      */
-    protected function getCellsFromMatrix()
+    public function getCellsFromMatrix()
     {
         $cells = [];
         foreach ($this->_matrix as $x => $array) {

@@ -7,11 +7,10 @@ use App\Cell\State;
 class StateLive extends State
 {
     /**
-     * @param [][] $cells
-     * @param NeighbourCounter[] $counters
+     * @param int $neighbourCount
      * @return int
      */
-    public function nextState(array $cells, array $counters)
+    public function nextState($neighbourCount)
     {
         
     }

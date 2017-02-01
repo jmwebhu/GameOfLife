@@ -4,8 +4,9 @@ namespace App\Cell;
 
 use App\Cell\State;
 use App\Cell\StateFactory;
+use App\Cell\ICell;
 
-class Cell
+class Cell implements ICell
 {
     /**
      * @var App\Cell\State

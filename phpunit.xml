@@ -18,7 +18,7 @@
         </testsuite>
 
         <testsuite name="Current Tests">
-            <directory suffix="StateLiveTest.php">./tests/Unit</directory>
+            <directory>./tests/Unit/NeighbourCounterTest.php</directory>
         </testsuite>
     </testsuites>
     <filter>

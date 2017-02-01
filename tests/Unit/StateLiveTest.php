@@ -24,9 +24,7 @@ class StateLiveTest extends AbstractStateTestCase
         $state = new StateLive(1);
 
         // Osszesen 2 szomszedja van
-        $counters = $this->getCounters(['horizontal' => 1, 'vertical' => 1, 'diagonal' => 0]);
-        $nextState = $state->nextState([], $counters);
-
+        $nextState = $state->nextState(2);
         $this->assertEquals(1, $nextState);
     }
 
@@ -39,9 +37,7 @@ class StateLiveTest extends AbstractStateTestCase
         $state = new StateLive(1);
 
         // Osszesen 3 szomszedja van
-        $counters = $this->getCounters(['horizontal' => 1, 'vertical' => 1, 'diagonal' => 1]);
-        $nextState = $state->nextState([], $counters);
-
+        $nextState = $state->nextState(3);
         $this->assertEquals(1, $nextState);
     }
 
@@ -54,9 +50,7 @@ class StateLiveTest extends AbstractStateTestCase
         $state = new StateLive(1);
 
         // Osszesen 1 szomszedja van
-        $counters = $this->getCounters(['horizontal' => 1, 'vertical' => 0, 'diagonal' => 0]);
-        $nextState = $state->nextState([], $counters);
-
+        $nextState = $state->nextState(1);
         $this->assertEquals(0, $nextState);
     }
 
@@ -69,9 +63,7 @@ class StateLiveTest extends AbstractStateTestCase
         $state = new StateLive(1);
 
         // Osszesen 4 szomszedja van
-        $counters = $this->getCounters(['horizontal' => 2, 'vertical' => 1, 'diagonal' => 1]);
-        $nextState = $state->nextState([], $counters);
-
+        $nextState = $state->nextState([], 4);
         $this->assertEquals(0, $nextState);
     }
 }
