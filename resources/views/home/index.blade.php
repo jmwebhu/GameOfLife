@@ -75,6 +75,7 @@
                     <button type="button" id="play" class="btn btn-success">Play</button>
                     <button type="button" id="stop" class="btn btn-danger">Stop</button>
                     <button type="button" id="next" class="btn btn-primary">Next</button>
+                    <button type="button" id="clear" class="btn btn-info">Clear</button>
                 </div>
                 <table id="matrix" style="height:300px;width:1200px;">
                     <tr>

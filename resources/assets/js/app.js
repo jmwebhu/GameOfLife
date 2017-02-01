@@ -1,4 +1,5 @@
 var App = {
+    interval: null,
     init: function () {
         this.cacheElements();
         this.bindEvents(); 
@@ -7,18 +8,38 @@ var App = {
         this.$play = $('button#play');
         this.$next = $('button#next');
         this.$stop = $('button#stop');
+        this.$clear = $('button#clear');
     },
     bindEvents: function () {
         $('table').on('click', 'td', App.cellClick);
 
-        this.$next.click(App.nextClick)
+        this.$next.click(App.nextClick);
+        this.$clear.click(App.clearMatrix);
+        this.$play.click(App.playClick);
+        this.$stop.click(App.stopClick);
     },
     cellClick: function () {
         $(this).toggleClass('active');
     },
     nextClick: function () {
-        console.log('NEXT'); 
-        App.getMatrix();
+        // Itt valoszinuleg hash -t kellene generalni az ertekekbol, igy lehetne GET keres, sajnos nem volt ra idom
+        $.ajax({
+            url: '/api/nextGeneration',
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                matrix: App.getMatrix()
+            },
+            success: function (nextGeneration) {
+                App.fillMatrix(nextGeneration);
+            }
+        });
+    },
+    playClick: function () {
+        App.interval = setInterval(App.nextClick, 1000);
+    },
+    stopClick: function () {
+        clearInterval(App.interval);
     },
     getMatrix: function () {
         var matrix = [];
@@ -29,7 +50,21 @@ var App = {
             });
         }); 
 
-        console.log(matrix); 
+        return matrix;
+    },
+    fillMatrix: function (nextGeneration) {
+        $('table#matrix tr').each(function (x) {
+            $(this).find('td').each(function (y) {
+                if (nextGeneration[x][y] == 1) {
+                    $(this).addClass('active');
+                } else {
+                    $(this).removeClass('active');
+                }
+            });
+        }); 
+    },
+    clearMatrix: function () {
+        $('table#matrix td').removeClass('active');
     }
 };
 
