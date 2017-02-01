@@ -11,6 +11,15 @@
 |
 */
 
+use App\Board;
+
 Route::get('/', function () {
-    return view('welcome');
+    $matrix = [
+        [1, 1, 0],
+        [0, 0, 0],
+        [1, 1, 1]
+    ];
+    $board = new Board();
+    $board->setMatrix($matrix);
+    $board->nextGeneration();
 });
