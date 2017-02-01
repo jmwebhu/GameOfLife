@@ -7,3 +7,15 @@
 
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+.active {
+    background-color: #636b6f !important;
+}
+
+div.buttons {
+    margin-bottom: 20px;
+}
+
+table, th, td {
+    border: 1px solid black;
+}

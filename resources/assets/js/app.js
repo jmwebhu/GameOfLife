@@ -1,20 +1,38 @@
+var App = {
+    init: function () {
+        this.cacheElements();
+        this.bindEvents(); 
+    },
+    cacheElements: function () {
+        this.$play = $('button#play');
+        this.$next = $('button#next');
+        this.$stop = $('button#stop');
+    },
+    bindEvents: function () {
+        $('table').on('click', 'td', App.cellClick);
 
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
+        this.$next.click(App.nextClick)
+    },
+    cellClick: function () {
+        $(this).toggleClass('active');
+    },
+    nextClick: function () {
+        console.log('NEXT'); 
+        App.getMatrix();
+    },
+    getMatrix: function () {
+        var matrix = [];
+        $('table#matrix tr').each(function (x) {
+            matrix[x] = [];
+            $(this).find('td').each(function (y) {
+                matrix[x][y] = ($(this).hasClass('active')) ? 1 : 0;
+            });
+        }); 
 
-require('./bootstrap');
+        console.log(matrix); 
+    }
+};
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
-Vue.component('example', require('./components/Example.vue'));
-
-const app = new Vue({
-    el: '#app'
+$(document).ready(function () {
+    App.init();
 });
