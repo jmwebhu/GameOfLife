@@ -44,10 +44,11 @@ class Cell implements ICell
     }
 
     /**
+     * @param int $neighbourCount
      * @return int
      */
-    public function nextState()
+    public function nextState($neighbourCount)
     {
-        return $this->_state->nextState();
+        return $this->_state->nextState($neighbourCount);
     }
 }

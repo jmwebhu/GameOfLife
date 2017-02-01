@@ -10,7 +10,8 @@ interface ICell
     public function getValue();
 
     /**
+     * @param int $neighbourCount
      * @return int
      */
-    public function nextState();
+    public function nextState($neighbourCount);
 }

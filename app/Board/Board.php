@@ -42,17 +42,27 @@ class Board
         $this->_height = count($matrix[0]);
     }
 
+    /**
+     * Visszaadja a board aktualis allapotabol a kovetkezo generaciot
+     * @return int[]
+     */
     public function nextGeneration()
     {
         $cells = $this->getCellsFromMatrix();
+        $nextValues = [];
+
         foreach ($cells as $x => $array) {
+            $nextValues[$x] = [];
             foreach ($array as $y => $cell) {
                 /**
                  * @var App\Cell\Cell $cell
                  */
-                $nextState = $cell->nextState($cells);
+                $neighborCounter = new NeighbourCounter($cells, $x, $y);
+                $nextValues[$x][$y] = $cell->nextState($neighborCounter->getCount());
             }
         }
+
+        return $nextValues;
     }
 
     /**
@@ -69,17 +79,5 @@ class Board
         }
 
         return $cells;
-    }
-
-    /**
-     * Visszaadja a megadott pozicio mellett levo 8 erteket
-     * Vizszintesen, fuggolegesen, atlosan
-     * @param int $x 
-     * @param int $y 
-     * @return void
-     */
-    public function getNeighboursOf($x, $y)
-    {
-        $half = intval(self::NEIGHBOURS_COUNT / 2);
     }
 }

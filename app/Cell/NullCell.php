@@ -16,7 +16,11 @@ class NullCell implements ICell
         return 0; 
     }
 
-    public function nextState()
+    /**
+     * @param int $neighbourCount 
+     * @return int
+     */
+    public function nextState($neighbourCount)
     {
         return 0;
     }

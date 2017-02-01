@@ -11,15 +11,22 @@
 |
 */
 
-use App\Board;
+use App\Board\Board;
 
 Route::get('/', function () {
     $matrix = [
-        [1, 1, 0],
+        [1, 0, 1],
         [0, 0, 0],
-        [1, 1, 1]
+        [1, 0, 1]
     ];
+        /* $matrix = [ */
+        /*     [1, 1, 0, 0, 0, 1], */
+        /*     [1, 0, 1, 1, 0, 1], */
+        /*     [1, 1, 0, 1, 1, 0], */
+        /*     [0, 1, 1, 0, 0, 0], */
+        /*     [0, 0, 0, 0, 0, 1] */
+        /* ]; */
     $board = new Board();
     $board->setMatrix($matrix);
-    $board->nextGeneration();
+    var_dump($board->nextGeneration());
 });
