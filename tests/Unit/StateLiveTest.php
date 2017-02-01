@@ -2,12 +2,12 @@
 
 namespace Tests\Unit;
 
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Tests\Unit\AbstractStateTestCase;
 use App\Cell\StateLive;
 
-class StateLiveTest extends TestCase
+class StateLiveTest extends AbstractStateTestCase
 {
     /**
      * Szabalyok:
@@ -24,7 +24,7 @@ class StateLiveTest extends TestCase
         $state = new StateLive(1);
 
         // Osszesen 2 szomszedja van
-        $counters = $this->getCounters(['horizontal' => 1, 'vertical' => 1, 'diagonal' => 0], [], 1, 1);
+        $counters = $this->getCounters(['horizontal' => 1, 'vertical' => 1, 'diagonal' => 0]);
         $nextState = $state->nextState([], $counters);
 
         $this->assertEquals(1, $nextState);
@@ -73,37 +73,5 @@ class StateLiveTest extends TestCase
         $nextState = $state->nextState([], $counters);
 
         $this->assertEquals(0, $nextState);
-    }
-
-    protected function getCounters(array $counts)
-    {
-        $mockHorizontal = $this->getMockBuilder('App\Board\NeighbourCounterHorizontal')
-            ->setConstructorArgs([[], 1, 1])
-            ->setMethods(['getCount'])
-            ->getMock();
-
-        $mockHorizontal->expects($this->any())
-            ->method('getCount')
-            ->will($this->returnValue($counts['horizontal']));
-
-        $mockVertical = $this->getMockBuilder('App\Board\NeighbourCounterVertical')
-            ->setConstructorArgs([[], 1, 1])
-            ->setMethods(['getCount'])
-            ->getMock();
-
-        $mockVertical->expects($this->any())
-            ->method('getCount')
-            ->will($this->returnValue($counts['vertical']));
-
-        $mockDiagonal = $this->getMockBuilder('App\Board\NeighbourCounterDiagonal')
-            ->setConstructorArgs([[], 1, 1])
-            ->setMethods(['getCount'])
-            ->getMock();
-
-        $mockDiagonal->expects($this->any())
-            ->method('getCount')
-            ->will($this->returnValue($counts['diagonal']));
-
-        return [$mockVertical, $mockHorizontal, $mockDiagonal];
     }
 }
