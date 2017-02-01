@@ -77,19 +77,14 @@
                     <button type="button" id="next" class="btn btn-primary">Next</button>
                     <button type="button" id="clear" class="btn btn-info">Clear</button>
                 </div>
-                <table id="matrix" style="height:300px;width:1200px;">
-                    <tr>
-                        <td></td><td></td><td></td><td class="active"></td><td></td><td></td><td></td><td></td><td></td><td></td>
-                    </tr>
-                    <tr>
-                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-                    </tr>
-                    <tr>
-                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-                    </tr>
-                    <tr>
-                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-                    </tr>
+                <table id="matrix" style="height:700px;width:1200px;">
+                    @for ($x = 0; $x < 10; $x++)
+                        <tr>
+                        @for ($y = 0; $y < 10; $y++)
+                            <td></td>
+                        @endfor
+                        </tr>
+                    @endfor
                 </table>
             </div>
         </div>
