@@ -76,12 +76,27 @@
                 <button type="button" id="next" class="btn btn-primary">Next</button>
                 <button type="button" id="clear" class="btn btn-info">Clear</button>
 
-                <form method="POST" action="/api/generation/save">
+                <h3>Save this generation</h3
+                <form method="POST"> 
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input type="text" class="form-control" id="name" required>
                     </div>
                     <button type="button" id="save" class="btn btn-link">Save</button>
+                </form>
+            </div>
+            <div>
+                <h3>Size</h3
+                <form method="POST"> 
+                    <div class="form-group">
+                        <label for="name">Width</label>
+                        <input type="text" class="form-control" id="width" value="10" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Height</label>
+                        <input type="text" class="form-control" id="height" value="8" required>
+                    </div>
+                    <button type="button" id="setSize" class="btn btn-link">Set size</button>
                 </form>
             </div>
             <table id="matrix" style="height:500px;width:1200px;">
