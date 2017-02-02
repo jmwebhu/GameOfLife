@@ -49,7 +49,7 @@ var App = {
             dataType: 'json',
             data: {
                 name: $('input#name').val(),
-                matrix: App.getMatrix()
+                matrix: JSON.stringify(App.getMatrix())
             },
             success: function (data) {
                 $('input#name').val('');
@@ -67,7 +67,7 @@ var App = {
             type: 'POST',
             dataType: 'json',
             data: {
-                matrix: App.getMatrix()
+                matrix: JSON.stringify(App.getMatrix())
             },
             success: function (nextGeneration) {
                 App.fillMatrix(nextGeneration);
@@ -75,7 +75,18 @@ var App = {
         });
     },
     playClick: function () {
-        App.interval = setInterval(App.nextClick, 1000);
+        var matrix = App.getMatrix();
+        var time = 1000;
+        var length = Math.max(matrix.length, matrix[0].length);
+
+        if (length > 50 && length < 100) {
+            time = 3000;
+        }
+
+        if (length >= 100) 
+            time = 5000;
+
+        App.interval = setInterval(App.nextClick, time);
     },
     stopClick: function () {
         clearInterval(App.interval);

@@ -21,7 +21,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('/generation/next', function (Request $request) {
-    $matrix = $request->input('matrix');
+    $matrix = json_decode($request->input('matrix'));
     $board = new Board;
     $board->setMatrix($matrix);
     $nextGeneration = $board->nextGeneration();
@@ -30,7 +30,7 @@ Route::post('/generation/next', function (Request $request) {
 });
 
 Route::post('/generation/save', function (Request $request) {
-    $matrix = $request->input('matrix');
+    $matrix = json_decode($request->input('matrix'));
     $generation = new Generation;
     $generation->name = $request->input('name');
     $generation->states = json_encode($matrix);

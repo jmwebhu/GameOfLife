@@ -86,6 +86,10 @@ class BoardTest extends TestCase
         $this->createBoard($matrix);
         $nextGeneration = $this->_board->nextGeneration();
         $this->assertEquals($expectedNextGeneration, $nextGeneration);
+
+        $this->createBoard($expectedNextGeneration);
+        $nextNextGeneration = $this->_board->nextGeneration();
+        $this->assertEquals($nextNextGeneration, $matrix);
     }
 
     /**
@@ -114,6 +118,10 @@ class BoardTest extends TestCase
         $this->createBoard($matrix);
         $nextGeneration = $this->_board->nextGeneration();
         $this->assertEquals($expectedNextGeneration, $nextGeneration);
+
+        $this->createBoard($nextGeneration);
+        $nextNextGeneration = $this->_board->nextGeneration();
+        $this->assertEquals($nextNextGeneration, $matrix);
     }
 
     /**
